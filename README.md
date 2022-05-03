@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Salad designer and planner
+We aim to provide our salad product planners with a tool to design different salads to be produced in a given week, according to demand and product availability.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+We've got a fancy "salad subscription" company, so we know before hand pretty much how many customers we'll have next week, along with how much we can expect to turn over.
 
-## Available Scripts
+We really don't need to make any complex calculation within the app, just lend the tool for our team to work comfortably with the available data.
 
-In the project directory, you can run:
+Here's a rough idea of the desired behaviour:
 
-### `npm start`
+- Our main goal is to create "composite" salad products.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Each salad will be stored with the following properties:
+  - **id** => integer
+  - **name** => string
+  - **type** => string (small/medium/large)
+  - **ingredients** (products) => array of objects
+    - id => integer
+    - numOfServings => integer
+  - **cost** => float
+  - **price** => float
+  - **hoursFresh** => integer (actually, the lowest value present in its ingredients, could be a function or a pre-calculated value).
+  - **targetStockByWeekday** => number of these salads needed for a particular weekday.
+  - **currentStock** => number of salads in stock.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- We've got a database with next week's available products, here are some notes:
+  - The main working unit for salad making will be a "**serving**".
+  - There's also a **weight per serving** (in grams as of now), so that we can send a comprehensive order to the producer at the end of the process.
+  - Each product belongs to a specific supplier.
+  - Here's the product schema:
+    - id => integer
+    - name => string
+    - costPerServing => float
+    - gramsPerServing => integer
+    - hoursFresh => integer
+    - supplierId => integer
 
-### `npm test`
+- There are a handful of suppliers:
+  - We want to know how much we'll need to order from each, after the planning is done.
+  - Supplier schema:
+    - id => integer
+    - name => string
+  - (\*) Additionally, we might want to calculate when to order what, to ensure freshness. Here are the rules for purchasing:
+    - We need to ensure freshness.
+    - We need to cut costs by ordering as much quantity as possible each time.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- There's a bit of business logic in our DataService, and more can be added if needed.
 
-### `npm run build`
+- (\*) Additionally, we can create a simple(?) planner for the manufacture following the design of the salads.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<footnote>(\*) => optional.</footnote>
