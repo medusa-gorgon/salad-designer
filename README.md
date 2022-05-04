@@ -29,38 +29,38 @@ Here's a rough idea of the desired behaviour:
 - We've got a database with next week's available products, here are some notes:
   - The main working unit for salad making is a "**serving**".
   - There's also a **weight per serving** (in grams as of now).
-  - Each product belongs to a specific supplier.
-  - Here's the product schema:
-    - id => integer
-    - name => string
-    - costPerServing => float (euros)
-    - weightPerServing => integer (grams)
-    - hoursFresh => integer
-    - supplierId => integer
+  - Each product belongs to a specific **supplier**.
+  - Here's the **product schema**:
+    - **id** => integer
+    - **name** => string
+    - **costPerServing** => float (euros)
+    - **weightPerServing** => integer (grams)
+    - **hoursFresh** => integer
+    - **supplierId** => integer
 - There's a bit of business logic in our DataService, and more can be added if needed. The basic info present is:
-  - Target weight per salad type.
-  - Target cost per salad type.
-  - Price per salad type.
+  - Target **weight** per salad type.
+  - Target **cost** per salad type.
+  - **Price** per salad type.
 
 The first and basic part of this project is the development of the forementioned tool.
 
 #### Additional tasks
 Optionally you may choose to engage in the following extra tasks:
 
-- There are a handful of suppliers and a bunch of subscriptions:
+- There are a handful of suppliers and a bunch of **subscriptions**:
   - (\*) We want to know how much we'll need to order from each, after the planning is done.
   - Supplier schema:
-    - id => integer
-    - name => string
+    - **id** => integer
+    - **name** => string
   - Subscription schema:
-    - id => integer
-    - name => string
-    - type => string
-    - weekdays => array of integers (1-5)
-  - (\*) Additionally, we might want to calculate what products to order each day of the week, to ensure freshness. Here are the rules for purchasing:
-    - We need to ensure freshness.
-    - We need to cut costs by ordering as much quantity as possible each time.
-- (\*) Additionally, we can create a simple(?) planner for the manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
+    - **id** => integer
+    - **name** => string
+    - **type** => string
+    - **weekdays** => array of integers (1-5)
+  - (\*) Additionally, we might want to calculate what products to order **each day** of the week, to ensure freshness. Here are the rules for purchasing:
+    - We need to **ensure freshness**.
+    - We need to **cut costs** by ordering as much quantity as possible each time.
+- (\*) Additionally, we can create a simple(?) **planner** for the manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
 
 
 
