@@ -6,7 +6,7 @@
   - styled-components
   - [simple-localstorage-data-service-stub](https://github.com/mpicpus/simple-localstorage-data-service-stub) (in-house rest-like data service).
 - Other:
-  - [Data set](https://github.com/mpicpus/challenge-data-set-1): in order to use the provided sample data, clone the "data" folder in /public.
+  - [Data set](https://github.com/mpicpus/challenge-data-set-1): in order to use the provided sample initial data, clone the "data" folder from this repo in /public.
 
 You can **fork this project** or **start your own** with the specified packages. The project doesn't require any additional services, since data is provided by the above localStorage-based solution.
 
