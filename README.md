@@ -1,4 +1,16 @@
 # Salad designer and planner
+### Technical specs:
+- React JS app.
+- Main dependencies:
+  - react-redux
+  - styled-components
+  - simple-localstorage-data-service-stub (in-house rest-like data service).
+- Other:
+  - [Data set](https://github.com/mpicpus/challenge-data-set-1): in order to use the provided sample data, clone the "data" folder in /public.
+
+You can **fork this project** or **start your own** with the specified packages. The project doesn't require any additional services, since data is provided by the above localStorage-based solution.
+
+### Challenge Description:
 **Mel's Kitchen** is a fancy "salad subscription" company. Customers subscribe to a small, medium or large salad every x days, so we know before hand pretty much how many salads we'll need to produce next week, along with how much we can expect to turn over.
 
 We aim to provide our salad product planners with a tool to design different salads to be produced in a given week, according to demand and product availability.
@@ -61,7 +73,5 @@ Optionally you may choose to engage in the following extra tasks:
     - We need to **ensure freshness**.
     - We need to **cut costs** by ordering as much quantity as possible each time.
 - (\*) Additionally, we can create a simple(?) **planner** for the manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
-
-
 
 <footnote>(\*) => optional.</footnote>
