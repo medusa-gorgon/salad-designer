@@ -26,7 +26,6 @@ Here's a rough idea of the desired behaviour:
   - **hoursFresh** => integer (actually, the lowest value present in its ingredients, could be a function or a pre-calculated value).
   - **targetStockByWeekday** => number of these salads needed for a particular weekday.
   - **currentStock** => number of salads in stock.
-
 - We've got a database with next week's available products, here are some notes:
   - The main working unit for salad making is a "**serving**".
   - There's also a **weight per serving** (in grams as of now).
@@ -38,7 +37,6 @@ Here's a rough idea of the desired behaviour:
     - weightPerServing => integer (grams)
     - hoursFresh => integer
     - supplierId => integer
-
 - There's a bit of business logic in our DataService, and more can be added if needed. The basic info present is:
   - Target weight per salad type.
   - Target cost per salad type.
@@ -54,13 +52,11 @@ Optionally you may choose to engage in the following extra tasks:
   - Supplier schema:
     - id => integer
     - name => string
-
   - Subscription schema:
     - id => integer
     - name => string
     - type => string
     - weekdays => array of integers (1-5)
-
   - (\*) Additionally, we might want to calculate what products to order each day of the week, to ensure freshness. Here are the rules for purchasing:
     - We need to ensure freshness.
     - We need to cut costs by ordering as much quantity as possible each time.
