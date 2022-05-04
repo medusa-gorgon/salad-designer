@@ -3,7 +3,7 @@ import DataService from "simple-localstorage-data-service-stub";
 
 console.log("im here")
 
-const dataService = DataService({flush: true});
+const dataService = DataService();
 
 const SaladDesigner = (props) => {
   const [products, setProducts] = useState([]);
