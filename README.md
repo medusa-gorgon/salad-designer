@@ -1,13 +1,18 @@
 # Salad designer and planner
+**Mel's Kitchen** is a fancy "salad subscription" company. Customers subscribe to a small, medium or large salad every x days, so we know before hand pretty much how many salads we'll need to produce next week, along with how much we can expect to turn over.
+
 We aim to provide our salad product planners with a tool to design different salads to be produced in a given week, according to demand and product availability.
-
-We've got a fancy "salad subscription" company, so we know before hand pretty much how many customers we'll have next week, along with how much we can expect to turn over.
-
-We really don't need to make any complex calculation within the app, just lend the tool for our team to work comfortably with the available data.
 
 Here's a rough idea of the desired behaviour:
 
-- Our main goal is to create "composite" salad products.
+- Our main goal is to create "composite" salad products. The tool could look something like this draft (just a visual queue, you may go in any direction you wish):
+
+![screenshot1.png](readme/screenshot1.png)
+  - Editable fields:
+    - name of salad
+    - type of salad
+    - ingredient (name/servings) 
+
 
 - Each salad will be stored with the following properties:
   - **id** => integer
@@ -23,29 +28,43 @@ Here's a rough idea of the desired behaviour:
   - **currentStock** => number of salads in stock.
 
 - We've got a database with next week's available products, here are some notes:
-  - The main working unit for salad making will be a "**serving**".
-  - There's also a **weight per serving** (in grams as of now), so that we can send a comprehensive order to the producer at the end of the process.
+  - The main working unit for salad making is a "**serving**".
+  - There's also a **weight per serving** (in grams as of now).
   - Each product belongs to a specific supplier.
   - Here's the product schema:
     - id => integer
     - name => string
-    - costPerServing => float
-    - gramsPerServing => integer
+    - costPerServing => float (euros)
+    - weightPerServing => integer (grams)
     - hoursFresh => integer
     - supplierId => integer
 
-- There are a handful of suppliers:
-  - We want to know how much we'll need to order from each, after the planning is done.
+- There's a bit of business logic in our DataService, and more can be added if needed. The basic info present is:
+  - Target weight per salad type.
+  - Target cost per salad type.
+  - Price per salad type.
+
+The first and basic part of this project is the development of the forementioned tool.
+
+#### Additional tasks
+Optionally you may choose to engage in the following extra tasks:
+
+- There are a handful of suppliers and a bunch of subscriptions:
+  - (\*) We want to know how much we'll need to order from each, after the planning is done.
   - Supplier schema:
     - id => integer
     - name => string
-  - (\*) Additionally, we might want to calculate when to order what, to ensure freshness. Here are the rules for purchasing:
+
+  - Subscription schema:
+    - id => integer
+    - name => string
+    - type => string
+    - weekdays => array of integers (1-5)
+
+  - (\*) Additionally, we might want to calculate what products to order each day of the week, to ensure freshness. Here are the rules for purchasing:
     - We need to ensure freshness.
     - We need to cut costs by ordering as much quantity as possible each time.
-
-- There's a bit of business logic in our DataService, and more can be added if needed.
-
-- (\*) Additionally, we can create a simple(?) planner for the manufacture following the design of the salads.
+- (\*) Additionally, we can create a simple(?) planner for the manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
 
 
 
