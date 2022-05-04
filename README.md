@@ -1,10 +1,10 @@
 # Salad designer and planner
 ### Technical specs:
 - React JS app.
-- Main dependencies:
+- Main dependencies (all in `package.json`):
   - react-redux
   - styled-components
-  - simple-localstorage-data-service-stub (in-house rest-like data service).
+  - [simple-localstorage-data-service-stub](https://github.com/mpicpus/simple-localstorage-data-service-stub) (in-house rest-like data service).
 - Other:
   - [Data set](https://github.com/mpicpus/challenge-data-set-1): in order to use the provided sample data, clone the "data" folder in /public.
 
