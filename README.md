@@ -72,6 +72,6 @@ Optionally you may choose to engage in the following extra tasks:
   - (\*) Additionally, we might want to calculate what products to order **each day** of the week, to ensure freshness. Here are the rules for purchasing:
     - We need to **ensure freshness**.
     - We need to **cut costs** by ordering as much quantity as possible each time.
-- (\*) Additionally, we can create a simple(?) **planner** for the manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
+- (\*) Additionally, we can create a simple(?) **salad recipe tool** for salad manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
 
 <footnote>(\*) => optional.</footnote>
