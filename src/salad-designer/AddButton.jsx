@@ -13,10 +13,16 @@ const Button = styled.button`
   }
 `;
 
-const AddButton = (props) => {
+const AddButton = ({ popup, setPopup }) => {
   return (
     <div>
-      <Button>+</Button>
+      <Button
+        onClick={() => {
+          setPopup(!popup);
+        }}
+      >
+        +
+      </Button>
     </div>
   );
 };

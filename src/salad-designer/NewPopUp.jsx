@@ -1,10 +1,12 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components/macro';
+
 const Block = styled.div`
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 35%;
   min-height: 250px;
   display: flex;
   flex-direction: column;
@@ -30,15 +32,32 @@ const Button = styled.button`
   }
 `;
 
-const NewPopUp = (props) => {
+const NewPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight, setTotalCost, setTotalWeight }) => {
+  const selectEl = useRef(null);
+
+  const handleClick = (e) => {
+    const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
+    e.preventDefault();
+    if (!added.includes(currentProduct)) {
+      setAdded([...added, currentProduct]);
+    }
+    setTotalCost(totalCost + Number(currentProduct.costPerServing));
+    setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
+    setPopup(false);
+  };
+
   return (
     <div>
       <Block>
         <div>Choose your ingredient:</div>
-        <select name='' id=''>
-          <option value='pasta'>Pasta</option>
+        <select name='' id='' ref={selectEl}>
+          {products.map((product) => (
+            <option key={product.id} value={product.id}>
+              {product.name}
+            </option>
+          ))}
         </select>
-        <Button>Save</Button>
+        <Button onClick={handleClick}>Save</Button>
       </Block>
     </div>
   );

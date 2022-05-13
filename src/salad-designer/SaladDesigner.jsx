@@ -4,6 +4,7 @@ import Ingredient from './Ingredient';
 import styled from 'styled-components/macro';
 import AddButton from './AddButton';
 import NewPopUp from './NewPopUp';
+import Total from './Total';
 
 console.log('im here');
 
@@ -19,6 +20,10 @@ const SaladDesigner = (props) => {
   const [suppliers, setSuppliers] = useState([]);
   const [businessLogic, setBusinessLogic] = useState(null);
   const [salads, setSalads] = useState([]);
+  const [popup, setPopup] = useState(false);
+  const [added, setAdded] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+  const [totalWeight, setTotalWeight] = useState(0);
 
   useEffect(() => {
     dataService.get('products').then((response) => {
@@ -45,9 +50,38 @@ const SaladDesigner = (props) => {
   return (
     <>
       <Container>
-        <Ingredient name='Pasta' g='100' price='0,2' />
-        <AddButton />
-        <NewPopUp />
+        <Total totalCost={totalCost} totalWeight={totalWeight} />
+        {added !== null
+          ? added.map((ing) => (
+              <Ingredient
+                totalCost={totalCost}
+                totalWeight={totalWeight}
+                setTotalCost={setTotalCost}
+                setTotalWeight={setTotalWeight}
+                key={ing.id}
+                name={ing.name}
+                g={ing.weightPerServing}
+                price={ing.costPerServing}
+                added={added}
+                setAdded={setAdded}
+              />
+            ))
+          : ''}
+        <AddButton popup={popup} setPopup={setPopup} />
+        {popup ? (
+          <NewPopUp
+            totalCost={totalCost}
+            totalWeight={totalWeight}
+            setTotalCost={setTotalCost}
+            setTotalWeight={setTotalWeight}
+            products={products}
+            setPopup={setPopup}
+            added={added}
+            setAdded={setAdded}
+          />
+        ) : (
+          ''
+        )}
         {/* <label htmlFor='input'>Form</label>
       <input type='file' id='input' onInput={handleFileInput} /> */}
       </Container>
