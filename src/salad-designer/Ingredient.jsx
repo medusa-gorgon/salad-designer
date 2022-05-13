@@ -51,11 +51,6 @@ const Ingredient = (props) => {
       props.setTotalWeight(props.totalWeight - props.g);
       props.setTotalCost(Math.round((props.totalCost - props.price) * 100) / 100);
     }
-    if (inputEl.current.value === 0) {
-      console.log(props.added.indexOf(props.name));
-      console.log('count 0');
-      // props.setAdded(props.added.splice(props.added.indexOf(props.name), 1));
-    }
   };
 
   return (

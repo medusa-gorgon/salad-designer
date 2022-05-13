@@ -41,7 +41,8 @@ const NewPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight,
     if (!added.includes(currentProduct)) {
       setAdded([...added, currentProduct]);
     }
-    setTotalCost(totalCost + Number(currentProduct.costPerServing));
+    setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
+    // setTotalCost(totalCost + Number(currentProduct.costPerServing));
     setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
     setPopup(false);
   };

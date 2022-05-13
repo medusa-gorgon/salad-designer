@@ -5,6 +5,7 @@ import styled from 'styled-components/macro';
 import AddButton from './AddButton';
 import NewPopUp from './NewPopUp';
 import Total from './Total';
+import Header from './Header';
 
 console.log('im here');
 
@@ -50,6 +51,7 @@ const SaladDesigner = (props) => {
   return (
     <>
       <Container>
+        <Header />
         <Total totalCost={totalCost} totalWeight={totalWeight} />
         {added !== null
           ? added.map((ing) => (
@@ -59,6 +61,7 @@ const SaladDesigner = (props) => {
                 setTotalCost={setTotalCost}
                 setTotalWeight={setTotalWeight}
                 key={ing.id}
+                id={ing.id}
                 name={ing.name}
                 g={ing.weightPerServing}
                 price={ing.costPerServing}
