@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components/macro';
 
 const Block = styled.div`
@@ -6,6 +6,7 @@ const Block = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  min-width: 250px;
   width: 35%;
   min-height: 250px;
   display: flex;
@@ -32,18 +33,36 @@ const Button = styled.button`
   }
 `;
 
-const NewPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight, setTotalCost, setTotalWeight }) => {
+const NewPopUp = ({
+  products,
+  setPopup,
+  setAdded,
+  added,
+  totalCost,
+  totalWeight,
+  setTotalCost,
+  setTotalWeight,
+  targetCost,
+  targetWeight,
+}) => {
   const selectEl = useRef(null);
 
-  const handleClick = (e) => {
+  const saveIng = (e) => {
     const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
     e.preventDefault();
-    if (!added.includes(currentProduct)) {
-      setAdded([...added, currentProduct]);
+    if (
+      !(
+        totalWeight + currentProduct.weightPerServing > targetWeight ||
+        totalCost + currentProduct.costPerServing > targetCost
+      )
+    ) {
+      if (!added.includes(currentProduct)) {
+        setAdded([...added, currentProduct]);
+      }
+      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
+
+      setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
     }
-    setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
-    // setTotalCost(totalCost + Number(currentProduct.costPerServing));
-    setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
     setPopup(false);
   };
 
@@ -58,7 +77,7 @@ const NewPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight,
             </option>
           ))}
         </select>
-        <Button onClick={handleClick}>Save</Button>
+        <Button onClick={saveIng}>Save</Button>
       </Block>
     </div>
   );

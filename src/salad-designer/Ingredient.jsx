@@ -39,15 +39,22 @@ const Ingredient = (props) => {
   let servingPrice = Math.round(props.price * count * 100) / 100;
 
   const inputEl = useRef(null);
+
   const changeServing = (action) => {
-    if (action === 'increase') {
-      setCount(Number(count) + 1);
-      inputEl.current.value = Number(inputEl.current.value) + 1;
-      props.setTotalWeight(props.totalWeight + props.g);
-      props.setTotalCost(Math.round((props.totalCost + props.price) * 100) / 100);
-    } else if (action === 'decrease') {
+    if (!(props.totalWeight + props.g > props.targetWeight || props.totalCost + props.price > props.targetCost)) {
+      if (action === 'increase') {
+        setCount(Number(count) + 1);
+        inputEl.current.value = Number(inputEl.current.value) + 1;
+
+        props.setTotalWeight(props.totalWeight + props.g);
+        props.setTotalCost(Math.round((props.totalCost + props.price) * 100) / 100);
+      }
+    }
+
+    if (action === 'decrease') {
       inputEl.current.value = Number(inputEl.current.value) - 1;
       setCount(count - 1);
+
       props.setTotalWeight(props.totalWeight - props.g);
       props.setTotalCost(Math.round((props.totalCost - props.price) * 100) / 100);
     }

@@ -9,11 +9,18 @@ import Header from './Header';
 
 console.log('im here');
 
+const sizes = [
+  { size: 'large', targetCost: 3.5, targetWeight: 550 },
+  { size: 'medium', targetCost: 2.5, targetWeight: 300 },
+  { size: 'small', targetCost: 1.5, targetWeight: 150 },
+];
+
 const dataService = DataService();
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   padding: 15px;
 `;
 const SaladDesigner = (props) => {
@@ -25,6 +32,7 @@ const SaladDesigner = (props) => {
   const [added, setAdded] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [totalWeight, setTotalWeight] = useState(0);
+  const [currentSize, setCurrentSize] = useState({ size: 'large', targetCost: 3.5, targetWeight: 550 });
 
   useEffect(() => {
     dataService.get('products').then((response) => {
@@ -51,11 +59,13 @@ const SaladDesigner = (props) => {
   return (
     <>
       <Container>
-        <Header />
+        <Header sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} />
         <Total totalCost={totalCost} totalWeight={totalWeight} />
         {added !== null
           ? added.map((ing) => (
               <Ingredient
+                targetCost={currentSize.targetCost}
+                targetWeight={currentSize.targetWeight}
                 totalCost={totalCost}
                 totalWeight={totalWeight}
                 setTotalCost={setTotalCost}
@@ -73,6 +83,8 @@ const SaladDesigner = (props) => {
         <AddButton popup={popup} setPopup={setPopup} />
         {popup ? (
           <NewPopUp
+            targetCost={currentSize.targetCost}
+            targetWeight={currentSize.targetWeight}
             totalCost={totalCost}
             totalWeight={totalWeight}
             setTotalCost={setTotalCost}

@@ -18,15 +18,7 @@ const Select = styled.select`
   width: fit-content;
 `;
 
-const Header = (props) => {
-  const sizes = [
-    { size: 'large', targetCost: 3.5, targetWeight: 550 },
-    { size: 'medium', targetCost: 2.5, targetWeight: 300 },
-    { size: 'small', targetCost: 1.5, targetWeight: 150 },
-  ];
-
-  const [currentSize, setCurrentSize] = useState({ size: 'large', targetCost: 3.5, targetWeight: 550 });
-
+const Header = ({ sizes, setCurrentSize, currentSize }) => {
   const handleChange = (e) => {
     const val = e.target.value;
 
