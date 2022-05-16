@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components/macro';
 
-const NewPopUp = ({
+const NewIngPopUp = ({
   products,
   setPopup,
   setAdded,
@@ -21,13 +21,12 @@ const NewPopUp = ({
 
     if (
       totalWeight + currentProduct.weightPerServing <= targetWeight &&
-      totalCost + currentProduct.costPerServing <= targetCost
+      totalCost + currentProduct.costPerServing <= targetCost &&
+      !added.includes(currentProduct)
     ) {
-      if (!added.includes(currentProduct)) {
-        setAdded([...added, currentProduct]);
-      }
-      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
+      setAdded([...added, currentProduct]);
 
+      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
       setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
     }
     setPopup(false);
@@ -51,7 +50,7 @@ const NewPopUp = ({
   );
 };
 
-export default NewPopUp;
+export default NewIngPopUp;
 
 const Block = styled.div`
   position: absolute;

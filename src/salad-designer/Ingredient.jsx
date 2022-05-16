@@ -14,14 +14,16 @@ const Ingredient = (props) => {
   const countInputEl = useRef(null);
 
   const changeServing = (action) => {
-    if (props.totalWeight + props.g <= props.targetWeight && props.totalCost + props.price <= props.targetCost) {
-      if (action === 'increaseBy1') {
-        setServingCount(Number(servingCount) + 1);
-        countInputEl.current.value = Number(countInputEl.current.value) + 1;
+    if (
+      props.totalWeight + props.g <= props.targetWeight &&
+      props.totalCost + props.price <= props.targetCost &&
+      action === 'increaseBy1'
+    ) {
+      setServingCount(Number(servingCount) + 1);
+      countInputEl.current.value = Number(countInputEl.current.value) + 1;
 
-        props.setTotalWeight(props.totalWeight + props.g);
-        props.setTotalCost(float(props.totalCost + props.price));
-      }
+      props.setTotalWeight(props.totalWeight + props.g);
+      props.setTotalCost(float(props.totalCost + props.price));
     }
 
     if (action === 'decreaseBy1' && countInputEl.current.value > 1) {
@@ -80,6 +82,7 @@ const Block = styled.div`
   align-items: center;
   background-color: #f2f2f2;
   padding: 20px;
+  margin-bottom: 5px;
   border-radius: 10px;
   font-size: 25px;
   border: 2px solid #aaaaaa;

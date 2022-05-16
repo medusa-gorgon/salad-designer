@@ -3,7 +3,7 @@ import DataService from 'simple-localstorage-data-service-stub';
 import Ingredient from './Ingredient';
 import styled from 'styled-components/macro';
 import AddButton from './AddButton';
-import NewPopUp from './NewPopUp';
+import NewIngPopUp from './NewIngPopUp';
 import Total from './Total';
 import Header from './Header';
 
@@ -52,7 +52,7 @@ const SaladDesigner = (props) => {
 
   return (
     <>
-      <Container onClick={(e) => (e.target !== <NewPopUp /> && popup ? setPopup(false) : '')}>
+      <Container onClick={(e) => (e.target !== <NewIngPopUp /> && popup ? setPopup(false) : '')}>
         <Header
           totalCost={totalCost}
           totalWeight={totalWeight}
@@ -86,7 +86,7 @@ const SaladDesigner = (props) => {
       <input type='file' id='input' onInput={handleFileInput} /> */}
       </Container>
       {popup ? (
-        <NewPopUp
+        <NewIngPopUp
           targetCost={currentSize.targetCost}
           targetWeight={currentSize.targetWeight}
           totalCost={totalCost}

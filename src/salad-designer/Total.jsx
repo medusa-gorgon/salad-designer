@@ -1,12 +1,5 @@
 import styled from 'styled-components/macro';
 
-const Block = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  padding: 10px;
-`;
-
 const Total = ({ totalWeight, totalCost }) => {
   return (
     <div>
@@ -19,3 +12,10 @@ const Total = ({ totalWeight, totalCost }) => {
 };
 
 export default Total;
+
+const Block = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 10px;
+`;
