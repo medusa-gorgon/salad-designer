@@ -1,5 +1,21 @@
 import styled from 'styled-components/macro';
 
+const AddButton = ({ setPopup }) => {
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          setPopup(true);
+        }}
+      >
+        +
+      </Button>
+    </div>
+  );
+};
+
+export default AddButton;
+
 const Button = styled.button`
   margin-top: 10px;
   padding: 10px 20px;
@@ -12,19 +28,3 @@ const Button = styled.button`
     color: #aaaaaa;
   }
 `;
-
-const AddButton = ({ popup, setPopup }) => {
-  return (
-    <div>
-      <Button
-        onClick={() => {
-          setPopup(!popup);
-        }}
-      >
-        +
-      </Button>
-    </div>
-  );
-};
-
-export default AddButton;

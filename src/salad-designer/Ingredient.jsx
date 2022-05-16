@@ -1,7 +1,80 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components/macro';
 
+const Ingredient = (props) => {
+  const [servingCount, setServingCount] = useState(1);
+
+  const float = (exp) => {
+    return Math.round(exp * 100) / 100;
+  };
+
+  let servingSize = props.g * servingCount;
+  let servingPrice = float(props.price * servingCount);
+
+  const countInputEl = useRef(null);
+
+  const changeServing = (action) => {
+    if (props.totalWeight + props.g <= props.targetWeight && props.totalCost + props.price <= props.targetCost) {
+      if (action === 'increaseBy1') {
+        setServingCount(Number(servingCount) + 1);
+        countInputEl.current.value = Number(countInputEl.current.value) + 1;
+
+        props.setTotalWeight(props.totalWeight + props.g);
+        props.setTotalCost(float(props.totalCost + props.price));
+      }
+    }
+
+    if (action === 'decreaseBy1' && countInputEl.current.value > 1) {
+      countInputEl.current.value = Number(countInputEl.current.value) - 1;
+      setServingCount(servingCount - 1);
+
+      props.setTotalWeight(props.totalWeight - props.g);
+      props.setTotalCost(float(props.totalCost - props.price));
+    }
+  };
+
+  const deleteIng = () => {
+    props.setAdded(props.added.filter((ing) => ing.id !== props.id));
+    props.setTotalWeight(props.totalWeight - servingSize);
+    props.setTotalCost(float(props.totalCost - servingPrice));
+  };
+
+  return (
+    <div>
+      <Block>
+        <span>{props.name}</span>
+        <Form>
+          <label htmlFor='servings'>servings:</label>
+          <Input ref={countInputEl} type='text' id='servings' defaultValue={1} readOnly></Input>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              changeServing('decreaseBy1');
+            }}
+          >
+            -
+          </Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              changeServing('increaseBy1');
+            }}
+          >
+            +
+          </Button>
+        </Form>
+        <span>{servingSize + 'g'}</span>
+        <span>{servingPrice + '€'}</span>
+        <CloseButton onClick={deleteIng}>×</CloseButton>
+      </Block>
+    </div>
+  );
+};
+
+export default Ingredient;
+
 const Block = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 2fr 3fr 1fr 1fr;
   align-items: center;
@@ -31,64 +104,16 @@ const Input = styled.input`
   width: 100px;
   text-align: right;
 `;
-
-const Ingredient = (props) => {
-  const [count, setCount] = useState(1);
-
-  let servingSize = props.g * count;
-  let servingPrice = Math.round(props.price * count * 100) / 100;
-
-  const inputEl = useRef(null);
-
-  const changeServing = (action) => {
-    if (!(props.totalWeight + props.g > props.targetWeight || props.totalCost + props.price > props.targetCost)) {
-      if (action === 'increase') {
-        setCount(Number(count) + 1);
-        inputEl.current.value = Number(inputEl.current.value) + 1;
-
-        props.setTotalWeight(props.totalWeight + props.g);
-        props.setTotalCost(Math.round((props.totalCost + props.price) * 100) / 100);
-      }
-    }
-
-    if (action === 'decrease') {
-      inputEl.current.value = Number(inputEl.current.value) - 1;
-      setCount(count - 1);
-
-      props.setTotalWeight(props.totalWeight - props.g);
-      props.setTotalCost(Math.round((props.totalCost - props.price) * 100) / 100);
-    }
-  };
-
-  return (
-    <div>
-      <Block>
-        <span>{props.name}</span>
-        <Form>
-          <label servings=''>servings:</label>
-          <Input ref={inputEl} type='text' id='servings' defaultValue={1}></Input>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              changeServing('decrease');
-            }}
-          >
-            -
-          </Button>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              changeServing('increase');
-            }}
-          >
-            +
-          </Button>
-        </Form>
-        <span>{servingSize + 'g'}</span>
-        <span>{servingPrice + '€'}</span>
-      </Block>
-    </div>
-  );
-};
-
-export default Ingredient;
+const CloseButton = styled.span`
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  line-height: 1;
+  font-size: 30px;
+  align-self: end;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    color: #f2994a;
+  }
+`;

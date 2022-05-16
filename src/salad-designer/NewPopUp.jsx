@@ -1,6 +1,58 @@
 import { useRef } from 'react';
 import styled from 'styled-components/macro';
 
+const NewPopUp = ({
+  products,
+  setPopup,
+  setAdded,
+  added,
+  totalCost,
+  totalWeight,
+  setTotalCost,
+  setTotalWeight,
+  targetCost,
+  targetWeight,
+}) => {
+  const selectEl = useRef(null);
+
+  const saveIng = (e) => {
+    const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
+    e.preventDefault();
+
+    if (
+      totalWeight + currentProduct.weightPerServing <= targetWeight &&
+      totalCost + currentProduct.costPerServing <= targetCost
+    ) {
+      if (!added.includes(currentProduct)) {
+        setAdded([...added, currentProduct]);
+      }
+      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
+
+      setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
+    }
+    setPopup(false);
+  };
+
+  return (
+    <div>
+      <Block>
+        <CloseButton onClick={() => setPopup(false)}>×</CloseButton>
+        <div>Choose your ingredient:</div>
+        <select name='' id='' ref={selectEl}>
+          {products.map((product) => (
+            <option key={product.id} value={product.id}>
+              {product.name}
+            </option>
+          ))}
+        </select>
+        <Button onClick={saveIng}>Save</Button>
+      </Block>
+    </div>
+  );
+};
+
+export default NewPopUp;
+
 const Block = styled.div`
   position: absolute;
   top: 40%;
@@ -32,55 +84,16 @@ const Button = styled.button`
     color: white;
   }
 `;
-
-const NewPopUp = ({
-  products,
-  setPopup,
-  setAdded,
-  added,
-  totalCost,
-  totalWeight,
-  setTotalCost,
-  setTotalWeight,
-  targetCost,
-  targetWeight,
-}) => {
-  const selectEl = useRef(null);
-
-  const saveIng = (e) => {
-    const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
-    e.preventDefault();
-    if (
-      !(
-        totalWeight + currentProduct.weightPerServing > targetWeight ||
-        totalCost + currentProduct.costPerServing > targetCost
-      )
-    ) {
-      if (!added.includes(currentProduct)) {
-        setAdded([...added, currentProduct]);
-      }
-      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
-
-      setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
-    }
-    setPopup(false);
-  };
-
-  return (
-    <div>
-      <Block>
-        <div>Choose your ingredient:</div>
-        <select name='' id='' ref={selectEl}>
-          {products.map((product) => (
-            <option key={product.id} value={product.id}>
-              {product.name}
-            </option>
-          ))}
-        </select>
-        <Button onClick={saveIng}>Save</Button>
-      </Block>
-    </div>
-  );
-};
-
-export default NewPopUp;
+const CloseButton = styled.span`
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  line-height: 1;
+  font-size: 30px;
+  align-self: end;
+  color: black;
+  cursor: pointer;
+  &:hover {
+    color: #f2994a;
+  }
+`;

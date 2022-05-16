@@ -17,12 +17,6 @@ const sizes = [
 
 const dataService = DataService();
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 800px;
-  width: 100%;
-  padding: 15px;
-`;
 const SaladDesigner = (props) => {
   const [products, setProducts] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
@@ -58,8 +52,14 @@ const SaladDesigner = (props) => {
 
   return (
     <>
-      <Container>
-        <Header sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} />
+      <Container onClick={(e) => (e.target !== <NewPopUp /> && popup ? setPopup(false) : '')}>
+        <Header
+          totalCost={totalCost}
+          totalWeight={totalWeight}
+          sizes={sizes}
+          currentSize={currentSize}
+          setCurrentSize={setCurrentSize}
+        />
         <Total totalCost={totalCost} totalWeight={totalWeight} />
         {added !== null
           ? added.map((ing) => (
@@ -80,28 +80,37 @@ const SaladDesigner = (props) => {
               />
             ))
           : ''}
-        <AddButton popup={popup} setPopup={setPopup} />
-        {popup ? (
-          <NewPopUp
-            targetCost={currentSize.targetCost}
-            targetWeight={currentSize.targetWeight}
-            totalCost={totalCost}
-            totalWeight={totalWeight}
-            setTotalCost={setTotalCost}
-            setTotalWeight={setTotalWeight}
-            products={products}
-            setPopup={setPopup}
-            added={added}
-            setAdded={setAdded}
-          />
-        ) : (
-          ''
-        )}
+        <AddButton setPopup={setPopup} />
+
         {/* <label htmlFor='input'>Form</label>
       <input type='file' id='input' onInput={handleFileInput} /> */}
       </Container>
+      {popup ? (
+        <NewPopUp
+          targetCost={currentSize.targetCost}
+          targetWeight={currentSize.targetWeight}
+          totalCost={totalCost}
+          totalWeight={totalWeight}
+          setTotalCost={setTotalCost}
+          setTotalWeight={setTotalWeight}
+          products={products}
+          setPopup={setPopup}
+          added={added}
+          setAdded={setAdded}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 };
 
 export default SaladDesigner;
+
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  height: 100vh;
+  padding: 15px;
+`;
