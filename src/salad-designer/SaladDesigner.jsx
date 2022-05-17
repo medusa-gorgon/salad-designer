@@ -28,7 +28,7 @@ const SaladDesigner = (props) => {
     });
 
     dataService.get('businessLogic').then((response) => {
-      setCurrentSize(response.saladTypes.large);
+      setCurrentSize(Object.entries(response.saladTypes)[2]);
       setBusinessLogic(response.saladTypes);
     });
 
@@ -62,8 +62,8 @@ const SaladDesigner = (props) => {
         {added !== null
           ? added.map((ing) => (
               <Ingredient
-                targetCost={currentSize.targetCost}
-                targetWeight={currentSize.targetWeight}
+                targetCost={currentSize[1].targetCost}
+                targetWeight={currentSize[1].targetWeight}
                 totalCost={totalCost}
                 totalWeight={totalWeight}
                 setTotalCost={setTotalCost}
@@ -85,8 +85,8 @@ const SaladDesigner = (props) => {
       </Container>
       {popup ? (
         <NewIngPopUp
-          targetCost={currentSize.targetCost}
-          targetWeight={currentSize.targetWeight}
+          targetCost={currentSize[1].targetCost}
+          targetWeight={currentSize[1].targetWeight}
           totalCost={totalCost}
           totalWeight={totalWeight}
           setTotalCost={setTotalCost}

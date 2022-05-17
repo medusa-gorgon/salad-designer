@@ -3,11 +3,10 @@ import styled from 'styled-components/macro';
 const Header = ({ saladTypes, setCurrentSize, currentSize, totalCost, totalWeight }) => {
   const changeSize = (e) => {
     const val = e.target.value;
-    const size = Object.keys(saladTypes).find((sz) => sz === val);
-    const sizeObj = saladTypes[size];
+    const size = Object.entries(saladTypes).find((sz) => sz[0] === val);
 
-    if (totalWeight <= sizeObj.targetWeight && totalCost <= sizeObj.targetCost) {
-      setCurrentSize(sizeObj);
+    if (totalWeight <= size[1].targetWeight && totalCost <= size[1].targetCost) {
+      setCurrentSize(size);
     }
   };
 
@@ -15,17 +14,20 @@ const Header = ({ saladTypes, setCurrentSize, currentSize, totalCost, totalWeigh
     <div>
       <Block>
         <h1>Salad</h1>
-        <Select name='' id='' onChange={changeSize}>
-          {saladTypes !== null &&
-            Object.keys(saladTypes).map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-        </Select>
+
+        {currentSize && (
+          <Select name='' id='' onChange={changeSize} value={currentSize[0]}>
+            {saladTypes !== null &&
+              Object.keys(saladTypes).map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+          </Select>
+        )}
       </Block>
       {currentSize ? (
-        <div>Target cost / weight: {`${currentSize.targetCost}€ / ${currentSize.targetWeight}g`}</div>
+        <div>Target cost / weight: {`${currentSize[1].targetCost}€ / ${currentSize[1].targetWeight}g`}</div>
       ) : (
         <div>Target cost / weight: {`0€ / 0g`}</div>
       )}
