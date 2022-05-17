@@ -9,12 +9,6 @@ import Header from './Header';
 
 console.log('im here');
 
-const sizes = [
-  { size: 'large', targetCost: 3.5, targetWeight: 550 },
-  { size: 'medium', targetCost: 2.5, targetWeight: 300 },
-  { size: 'small', targetCost: 1.5, targetWeight: 150 },
-];
-
 const dataService = DataService();
 
 const SaladDesigner = (props) => {
@@ -26,12 +20,16 @@ const SaladDesigner = (props) => {
   const [added, setAdded] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [totalWeight, setTotalWeight] = useState(0);
-  const [currentSize, setCurrentSize] = useState({ size: 'large', targetCost: 3.5, targetWeight: 550 });
+  const [currentSize, setCurrentSize] = useState();
 
   useEffect(() => {
     dataService.get('products').then((response) => {
       setProducts(response);
-      console.log(response);
+    });
+
+    dataService.get('businessLogic').then((response) => {
+      setCurrentSize(response.saladTypes.large);
+      setBusinessLogic(response.saladTypes);
     });
 
     // [...]
@@ -56,7 +54,7 @@ const SaladDesigner = (props) => {
         <Header
           totalCost={totalCost}
           totalWeight={totalWeight}
-          sizes={sizes}
+          saladTypes={businessLogic}
           currentSize={currentSize}
           setCurrentSize={setCurrentSize}
         />
