@@ -101,9 +101,10 @@ const Input = styled.input`
 `;
 const CloseButton = styled.span`
   position: absolute;
-  top: 0px;
-  right: 5px;
+  top: -10px;
+  right: -5px;
   line-height: 1;
+  padding: 10px;
   font-size: 30px;
   align-self: end;
   color: black;

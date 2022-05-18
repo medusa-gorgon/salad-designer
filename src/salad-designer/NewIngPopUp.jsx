@@ -38,7 +38,7 @@ const NewIngPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeig
 export default NewIngPopUp;
 
 const Block = styled.div`
-  position: absolute;
+  position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -70,9 +70,10 @@ const Button = styled.button`
 `;
 const CloseButton = styled.span`
   position: absolute;
-  top: 0px;
-  right: 5px;
+  top: -10px;
+  right: -5px;
   line-height: 1;
+  padding: 10px;
   font-size: 30px;
   align-self: end;
   color: black;

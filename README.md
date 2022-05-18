@@ -1,5 +1,7 @@
 # Salad designer and planner
+
 ### Technical specs:
+
 - React JS app.
 - Main dependencies (all in `package.json`):
   - react-redux
@@ -11,6 +13,7 @@
 You can **fork this project** or **start your own** with the specified packages. The project doesn't require any additional services, since data is provided by the above localStorage-based solution.
 
 ### Challenge Description:
+
 **Mel's Kitchen** is a fancy "salad subscription" company. Customers subscribe to a small, medium or large salad every x days, so we know before hand pretty much how many salads we'll need to produce next week, along with how much we can expect to turn over.
 
 We aim to provide our salad product planners with a tool to design different salads to be produced in a given week, according to demand and product availability.
@@ -20,11 +23,12 @@ Here's a rough idea of the desired behaviour:
 - Our main goal is to create "composite" salad products. The tool could look something like this draft (just a visual queue, you may go in any direction you wish):
 
 ![screenshot1.png](readme/screenshot1.png)
-  - Editable fields:
-    - name of salad
-    - type of salad
-    - ingredient (name/servings) 
 
+- Editable fields:
+
+  - name of salad
+  - type of salad
+  - ingredient (name/servings)
 
 - Each salad will be stored with the following properties:
   - **id** => integer
@@ -57,6 +61,7 @@ Here's a rough idea of the desired behaviour:
 The first and basic part of this project is the development of the forementioned tool.
 
 #### Additional tasks
+
 Optionally you may choose to engage in the following extra tasks:
 
 - There are a handful of suppliers and a bunch of **subscriptions**:
@@ -73,5 +78,9 @@ Optionally you may choose to engage in the following extra tasks:
     - We need to **ensure freshness**.
     - We need to **cut costs** by ordering as much quantity as possible each time.
 - (\*) Additionally, we can create a simple(?) **salad recipe tool** for salad manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
+
+## Deploy
+
+[mg-bizarre.github.io/farmy-challenge-1](https://mg-bizarre.github.io/farmy-challenge-1)
 
 <footnote>(\*) => optional.</footnote>

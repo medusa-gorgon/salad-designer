@@ -102,6 +102,7 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 800px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   padding: 15px;
 `;
