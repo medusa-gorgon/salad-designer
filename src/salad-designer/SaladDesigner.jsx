@@ -12,10 +12,11 @@ console.log('im here');
 const dataService = DataService();
 
 const SaladDesigner = (props) => {
-  const [products, setProducts] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
-  const [businessLogic, setBusinessLogic] = useState(null);
   const [salads, setSalads] = useState([]);
+
+  const [products, setProducts] = useState([]);
+  const [businessLogic, setBusinessLogic] = useState(null);
   const [popup, setPopup] = useState(false);
   const [added, setAdded] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
@@ -28,7 +29,7 @@ const SaladDesigner = (props) => {
     });
 
     dataService.get('businessLogic').then((response) => {
-      setCurrentSize(Object.entries(response.saladTypes)[2]);
+      setCurrentSize(response.saladTypes[2]);
       setBusinessLogic(response.saladTypes);
     });
 
@@ -51,19 +52,16 @@ const SaladDesigner = (props) => {
   return (
     <>
       <Container onClick={(e) => (e.target !== <NewIngPopUp /> && popup ? setPopup(false) : '')}>
-        <Header
+        <Header saladTypes={businessLogic} currentSize={currentSize} setCurrentSize={setCurrentSize} />
+        <Total
           totalCost={totalCost}
           totalWeight={totalWeight}
-          saladTypes={businessLogic}
-          currentSize={currentSize}
-          setCurrentSize={setCurrentSize}
+          targetCost={currentSize && currentSize.targetCost}
+          targetWeight={currentSize && currentSize.targetWeight}
         />
-        <Total totalCost={totalCost} totalWeight={totalWeight} />
         {added !== null
           ? added.map((ing) => (
               <Ingredient
-                targetCost={currentSize[1].targetCost}
-                targetWeight={currentSize[1].targetWeight}
                 totalCost={totalCost}
                 totalWeight={totalWeight}
                 setTotalCost={setTotalCost}
@@ -79,14 +77,9 @@ const SaladDesigner = (props) => {
             ))
           : ''}
         <AddButton setPopup={setPopup} />
-
-        {/* <label htmlFor='input'>Form</label>
-      <input type='file' id='input' onInput={handleFileInput} /> */}
       </Container>
       {popup ? (
         <NewIngPopUp
-          targetCost={currentSize[1].targetCost}
-          targetWeight={currentSize[1].targetWeight}
           totalCost={totalCost}
           totalWeight={totalWeight}
           setTotalCost={setTotalCost}

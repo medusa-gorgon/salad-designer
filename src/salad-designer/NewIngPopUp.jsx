@@ -1,32 +1,17 @@
 import { useRef } from 'react';
 import styled from 'styled-components/macro';
 
-const NewIngPopUp = ({
-  products,
-  setPopup,
-  setAdded,
-  added,
-  totalCost,
-  totalWeight,
-  setTotalCost,
-  setTotalWeight,
-  targetCost,
-  targetWeight,
-}) => {
+const NewIngPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight, setTotalCost, setTotalWeight }) => {
   const selectEl = useRef(null);
 
   const saveIng = (e) => {
     const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
     e.preventDefault();
 
-    if (
-      totalWeight + currentProduct.weightPerServing <= targetWeight &&
-      totalCost + currentProduct.costPerServing <= targetCost &&
-      !added.includes(currentProduct)
-    ) {
+    if (!added.includes(currentProduct)) {
       setAdded([...added, currentProduct]);
 
-      setTotalCost(Math.round((totalCost + Number(currentProduct.costPerServing)) * 100) / 100);
+      setTotalCost(totalCost + Number(currentProduct.costPerServing));
       setTotalWeight(totalWeight + Number(currentProduct.weightPerServing));
     }
     setPopup(false);

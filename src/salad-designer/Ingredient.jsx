@@ -4,41 +4,33 @@ import styled from 'styled-components/macro';
 const Ingredient = (props) => {
   const [servingCount, setServingCount] = useState(1);
 
-  const float = (exp) => {
-    return Math.round(exp * 100) / 100;
-  };
-
   let servingSize = props.g * servingCount;
-  let servingPrice = float(props.price * servingCount);
+  let servingPrice = props.price * servingCount;
 
   const countInputEl = useRef(null);
 
-  const changeServing = (action) => {
-    if (
-      props.totalWeight + props.g <= props.targetWeight &&
-      props.totalCost + props.price <= props.targetCost &&
-      action === 'increaseBy1'
-    ) {
-      setServingCount(Number(servingCount) + 1);
-      countInputEl.current.value = Number(countInputEl.current.value) + 1;
-
-      props.setTotalWeight(props.totalWeight + props.g);
-      props.setTotalCost(float(props.totalCost + props.price));
-    }
-
-    if (action === 'decreaseBy1' && countInputEl.current.value > 1) {
+  const decreaseBy1 = () => {
+    if (countInputEl.current.value > 1) {
       countInputEl.current.value = Number(countInputEl.current.value) - 1;
       setServingCount(servingCount - 1);
 
       props.setTotalWeight(props.totalWeight - props.g);
-      props.setTotalCost(float(props.totalCost - props.price));
+      props.setTotalCost(props.totalCost - props.price);
     }
   };
 
-  const deleteIng = () => {
+  const increaseBy1 = () => {
+    setServingCount(Number(servingCount) + 1);
+    countInputEl.current.value = Number(countInputEl.current.value) + 1;
+
+    props.setTotalWeight(props.totalWeight + props.g);
+    props.setTotalCost(props.totalCost + props.price);
+  };
+
+  const deleteIngredient = () => {
     props.setAdded(props.added.filter((ing) => ing.id !== props.id));
     props.setTotalWeight(props.totalWeight - servingSize);
-    props.setTotalCost(float(props.totalCost - servingPrice));
+    props.setTotalCost(props.totalCost - servingPrice);
   };
 
   return (
@@ -51,7 +43,7 @@ const Ingredient = (props) => {
           <Button
             onClick={(e) => {
               e.preventDefault();
-              changeServing('decreaseBy1');
+              decreaseBy1();
             }}
           >
             -
@@ -59,15 +51,15 @@ const Ingredient = (props) => {
           <Button
             onClick={(e) => {
               e.preventDefault();
-              changeServing('increaseBy1');
+              increaseBy1();
             }}
           >
             +
           </Button>
         </Form>
         <span>{servingSize + 'g'}</span>
-        <span>{servingPrice + '€'}</span>
-        <CloseButton onClick={deleteIng}>×</CloseButton>
+        <span>{servingPrice.toFixed(2) + '€'}</span>
+        <CloseButton onClick={deleteIngredient}>×</CloseButton>
       </Block>
     </div>
   );
