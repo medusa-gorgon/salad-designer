@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/farmy-challenge-1/static/css/main.f31d7e74.css",
+    "main.js": "/farmy-challenge-1/static/js/main.ed00a17c.js",
+    "static/js/787.c27acdd8.chunk.js": "/farmy-challenge-1/static/js/787.c27acdd8.chunk.js",
+    "index.html": "/farmy-challenge-1/index.html",
+    "main.f31d7e74.css.map": "/farmy-challenge-1/static/css/main.f31d7e74.css.map",
+    "main.ed00a17c.js.map": "/farmy-challenge-1/static/js/main.ed00a17c.js.map",
+    "787.c27acdd8.chunk.js.map": "/farmy-challenge-1/static/js/787.c27acdd8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f31d7e74.css",
+    "static/js/main.ed00a17c.js"
+  ]
+}
