@@ -1,5 +1,9 @@
 # Salad designer and planner
 
+## Deploy
+
+[mg-bizarre.github.io/farmy-challenge-1](https://mg-bizarre.github.io/farmy-challenge-1)
+
 ### Technical specs:
 
 - React JS app.
@@ -78,9 +82,5 @@ Optionally you may choose to engage in the following extra tasks:
     - We need to **ensure freshness**.
     - We need to **cut costs** by ordering as much quantity as possible each time.
 - (\*) Additionally, we can create a simple(?) **salad recipe tool** for salad manufacture following the design of the salads. Sorting of salad ingredients by drag and drop would be useful for this one.
-
-## Deploy
-
-[mg-bizarre.github.io/farmy-challenge-1](https://mg-bizarre.github.io/farmy-challenge-1)
 
 <footnote>(\*) => optional.</footnote>
