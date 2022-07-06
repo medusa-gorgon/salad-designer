@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/farmy-challenge-1/static/css/main.6e7363c1.css",
-    "main.js": "/farmy-challenge-1/static/js/main.1faee1da.js",
-    "index.html": "/farmy-challenge-1/index.html",
-    "main.6e7363c1.css.map": "/farmy-challenge-1/static/css/main.6e7363c1.css.map",
-    "main.1faee1da.js.map": "/farmy-challenge-1/static/js/main.1faee1da.js.map"
+    "main.css": "/salad-designer/static/css/main.3eb5213e.css",
+    "main.js": "/salad-designer/static/js/main.e7b94004.js",
+    "index.html": "/salad-designer/index.html",
+    "main.3eb5213e.css.map": "/salad-designer/static/css/main.3eb5213e.css.map",
+    "main.e7b94004.js.map": "/salad-designer/static/js/main.e7b94004.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e7363c1.css",
-    "static/js/main.1faee1da.js"
+    "static/css/main.3eb5213e.css",
+    "static/js/main.e7b94004.js"
   ]
 }
