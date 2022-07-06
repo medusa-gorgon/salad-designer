@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/farmy-challenge-1/static/css/main.f31d7e74.css",
-    "main.js": "/farmy-challenge-1/static/js/main.cecc1992.js",
-    "static/js/787.c27acdd8.chunk.js": "/farmy-challenge-1/static/js/787.c27acdd8.chunk.js",
+    "main.css": "/farmy-challenge-1/static/css/main.6e7363c1.css",
+    "main.js": "/farmy-challenge-1/static/js/main.1faee1da.js",
     "index.html": "/farmy-challenge-1/index.html",
-    "main.f31d7e74.css.map": "/farmy-challenge-1/static/css/main.f31d7e74.css.map",
-    "main.cecc1992.js.map": "/farmy-challenge-1/static/js/main.cecc1992.js.map",
-    "787.c27acdd8.chunk.js.map": "/farmy-challenge-1/static/js/787.c27acdd8.chunk.js.map"
+    "main.6e7363c1.css.map": "/farmy-challenge-1/static/css/main.6e7363c1.css.map",
+    "main.1faee1da.js.map": "/farmy-challenge-1/static/js/main.1faee1da.js.map"
   },
   "entrypoints": [
-    "static/css/main.f31d7e74.css",
-    "static/js/main.cecc1992.js"
+    "static/css/main.6e7363c1.css",
+    "static/js/main.1faee1da.js"
   ]
 }
