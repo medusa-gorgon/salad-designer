@@ -1,53 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import DataService from 'simple-localstorage-data-service-stub';
+import React, { useState } from 'react';
 import Ingredient from './Ingredient';
 import styled from 'styled-components/macro';
 import AddButton from './AddButton';
 import NewIngPopUp from './NewIngPopUp';
 import Total from './Total';
 import Header from './Header';
-
-console.log('im here');
-
-const dataService = DataService();
+import data from '../data.json';
 
 const SaladDesigner = (props) => {
-  const [suppliers, setSuppliers] = useState([]);
-  const [salads, setSalads] = useState([]);
-
-  const [products, setProducts] = useState([]);
-  const [businessLogic, setBusinessLogic] = useState(null);
+  // eslint-disable-next-line
+  const [products, setProducts] = useState(data.products); // eslint-disable-next-line
+  const [businessLogic, setBusinessLogic] = useState(data.businessLogic.saladTypes);
   const [popup, setPopup] = useState(false);
   const [added, setAdded] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [totalWeight, setTotalWeight] = useState(0);
-  const [currentSize, setCurrentSize] = useState();
-
-  useEffect(() => {
-    dataService.get('products').then((response) => {
-      setProducts(response);
-    });
-
-    dataService.get('businessLogic').then((response) => {
-      setCurrentSize(response.saladTypes[2]);
-      setBusinessLogic(response.saladTypes);
-    });
-
-    // [...]
-  }, []);
-
-  // Example of data file save.
-  const onSaveClick = () => {
-    dataService.saveData().then(() => console.log('saved!'));
-  };
-
-  // Example of data file upload.
-  const handleFileInput = (event) => {
-    dataService.uploadFileInput(event).then((r) => {
-      event.target.value = null;
-      console.log('done!', { r });
-    });
-  };
+  const [currentSize, setCurrentSize] = useState(data.businessLogic.saladTypes[2]);
 
   return (
     <>

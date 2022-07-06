@@ -1,0 +1,18 @@
+@import url(./normalize.css);
+@import url(./global.css);
+
+:root {
+  --primary: #000;
+  --bg: #fff;
+  /* --fieldBg: #f2f2f2;
+  --border: #aaa;
+  --buttonBg: #c1c1c1; */
+  --fieldBg: #e8ffba;
+  --border: #aaa;
+  --buttonBg: #9acd32;
+  --accent: #ffae42; /*#f2994a*/
+  --warning: red;
+}
+body {
+  color: var(--primary);
+}

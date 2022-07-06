@@ -36,30 +36,37 @@ const Ingredient = (props) => {
   return (
     <div>
       <Block>
-        <span>{props.name}</span>
-        <Form>
-          <label htmlFor='servings'>servings:</label>
-          <Input ref={countInputEl} type='text' id='servings' defaultValue={1} readOnly></Input>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              decreaseBy1();
-            }}
-          >
-            -
-          </Button>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              increaseBy1();
-            }}
-          >
-            +
-          </Button>
-        </Form>
-        <span>{servingSize + 'g'}</span>
-        <span>{servingPrice.toFixed(2) + '€'}</span>
-        <CloseButton onClick={deleteIngredient}>×</CloseButton>
+        <div>{props.name}</div>
+        <div>
+          <Form>
+            <label htmlFor='servings'>servings:</label>
+            <Input ref={countInputEl} type='text' id='servings' defaultValue={1} readOnly></Input>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                decreaseBy1();
+              }}
+            >
+              -
+            </Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                increaseBy1();
+              }}
+            >
+              +
+            </Button>
+          </Form>
+        </div>
+        <div className='serving'>
+          <div>{servingSize + 'g'}</div>
+          <div>{servingPrice.toFixed(2) + '€'}</div>
+        </div>
+
+        <CloseButton aria-label='remove ingredient' onClick={deleteIngredient}>
+          ×
+        </CloseButton>
       </Block>
     </div>
   );
@@ -70,46 +77,72 @@ export default Ingredient;
 const Block = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 2fr 3fr 1fr 1fr;
+  grid-template-columns: 2fr 3fr 2fr;
   align-items: center;
-  background-color: #f2f2f2;
-  padding: 20px;
+  justify-items: center;
+  background-color: var(--fieldBg);
+  padding: 15px;
   margin-bottom: 5px;
   border-radius: 10px;
   font-size: 25px;
-  border: 2px solid #aaaaaa;
+  border: 2px solid var(--border);
+  & div:not(:last-of-type) {
+    padding-right: 10px;
+  }
+  .serving {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  @media (max-width: 48rem) {
+    display: flex;
+    flex-direction: column;
+    & div:not(:last-of-type) {
+      padding: 0 0 10px 0;
+    }
+  }
 `;
 const Button = styled.button`
-  padding: 10px 20px;
-  border: 2px solid #aaaaaa;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border);
   border-radius: 5px;
-  font-size: 25px;
-  background-color: #c1c1c1;
+  font-size: 1.563rem;
+  background-color: var(--buttonBg);
+  color: var(--primary);
+  margin-right: 10px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: var(--accent);
+  }
 `;
 const Form = styled.form`
-  width: 45%;
   display: flex;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: var(--fieldBg);
   justify-content: space-between;
 `;
 const Input = styled.input`
-  font-size: 25px;
+  font-size: 1.563rem;
   border-radius: 5px;
-  width: 100px;
+  width: 60px;
   text-align: right;
+  color: var(--primary);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  margin: 0 10px;
 `;
-const CloseButton = styled.span`
+const CloseButton = styled.button`
   position: absolute;
   top: -10px;
   right: -5px;
   line-height: 1;
   padding: 10px;
-  font-size: 30px;
+  font-size: 1.875rem;
   align-self: end;
-  color: black;
+  transition: all 0.3s;
   cursor: pointer;
   &:hover {
-    color: #f2994a;
+    color: var(--accent);
   }
 `;

@@ -26,10 +26,10 @@ export default Total;
 const Block = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 20px;
-  padding: 10px;
+  font-size: 1.5rem;
+  padding: 30px 0;
 
   .above-target {
-    color: red;
+    color: var(--warning);
   }
 `;

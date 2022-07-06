@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useRef } from 'react';
 import styled from 'styled-components/macro';
 
 const NewIngPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeight, setTotalCost, setTotalWeight }) => {
   const selectEl = useRef(null);
+  const [expanded, setExpanded] = useState(false);
 
   const saveIng = (e) => {
     const currentProduct = products.find((pr) => pr.id.toString() === selectEl.current.value.toString());
@@ -20,16 +22,29 @@ const NewIngPopUp = ({ products, setPopup, setAdded, added, totalCost, totalWeig
   return (
     <div>
       <Block>
-        <CloseButton onClick={() => setPopup(false)}>×</CloseButton>
+        <CloseButton aria-label='close popup' onClick={() => setPopup(false)}>
+          ×
+        </CloseButton>
         <div>Choose your ingredient:</div>
-        <select name='' id='' ref={selectEl}>
+        <select
+          aria-expanded={expanded}
+          onClick={() => {
+            setExpanded(!expanded);
+          }}
+          className='select'
+          name=''
+          id=''
+          ref={selectEl}
+        >
           {products.map((product) => (
             <option key={product.id} value={product.id}>
               {product.name}
             </option>
           ))}
         </select>
-        <Button onClick={saveIng}>Save</Button>
+        <Button aria-label='save ingredient' onClick={saveIng}>
+          Save
+        </Button>
       </Block>
     </div>
   );
@@ -42,43 +57,50 @@ const Block = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 250px;
+  min-width: 310px;
   width: 35%;
   min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: var(--bg);
   justify-content: space-around;
   padding: 20px;
   border-radius: 10px;
-  font-size: 25px;
-  border: 2px solid #aaaaaa;
+  font-size: 1.563rem;
+  border: 2px solid var(--border);
+  color: var(--primary);
+
+  .select {
+    color: var(--primary);
+  }
 `;
 
 const Button = styled.button`
   margin-top: 10px;
   padding: 10px 20px;
-  border: 2px solid #aaaaaa;
+  border: 2px solid var(--border);
   border-radius: 5px;
-  font-size: 25px;
-  background-color: #f2994a;
+  font-size: 1.563rem;
+  background-color: var(--accent);
   width: 100%;
+  color: var(--primary);
+  transition: all 0.3s;
   &:hover {
-    color: white;
+    color: var(--bg);
   }
 `;
-const CloseButton = styled.span`
+const CloseButton = styled.button`
   position: absolute;
   top: -10px;
   right: -5px;
   line-height: 1;
   padding: 10px;
-  font-size: 30px;
+  font-size: 1.875rem;
   align-self: end;
-  color: black;
   cursor: pointer;
+  transition: all 0.3s;
   &:hover {
-    color: #f2994a;
+    color: var(--accent);
   }
 `;
