@@ -24,4 +24,4 @@ You may also see any lint errors in the console.
 
 ## Deploy
 
-[mg-bizarre.github.io/farmy-challenge-1](https://mg-bizarre.github.io/farmy-challenge-1)
+[mg-bizarre.github.io/salad-designer](https://mg-bizarre.github.io/salad-designer)
